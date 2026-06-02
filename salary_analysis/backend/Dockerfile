@@ -11,6 +11,7 @@ COPY app.py .
 COPY ai/ ai/
 COPY agent/ agent/
 COPY fetchers/ fetchers/
+COPY langchain_graph/ langchain_graph/
 
 EXPOSE 8000
 

@@ -439,6 +439,90 @@ def agent_reset():
     return {"status": "reset"}
 
 
+# ===== LangGraph Agent 端点 (Phase 5) =============================
+
+_lg_orchestrator = None
+
+
+def _get_lg_orchestrator():
+    """延迟初始化 LangGraph Orchestrator"""
+    global _lg_orchestrator
+    if _lg_orchestrator is None:
+        try:
+            from langchain_graph.adapter import LangGraphOrchestrator
+            _lg_orchestrator = LangGraphOrchestrator()
+        except Exception as e:
+            logger = logging.getLogger("app")
+            logger.warning(f"LangGraph Orchestrator 初始化失败: {e}")
+            return None
+    return _lg_orchestrator
+
+
+@app.post("/api/agent/langgraph/chat")
+async def langgraph_chat(req: dict):
+    """LangGraph Agent 对话（非流式）"""
+    lg = _get_lg_orchestrator()
+    if not lg:
+        return {"reply": "LangGraph Agent 未就绪", "status": "unconfigured"}
+
+    message = sanitize_input(req.get("message", ""), 4000)
+    metadata = {
+        "industry": req.get("industry", "互联网"),
+        "city": req.get("city", "北京"),
+    }
+    lg.working.update_query(metadata["industry"], metadata["city"])
+
+    try:
+        result = await lg.process(message)
+        return {
+            "reply": result.final_answer,
+            "status": "success",
+            "steps": len(result.steps),
+            "steps_detail": [
+                {"tool": s.tool_name, "args": s.tool_args,
+                 "result": s.tool_result[:300] if s.tool_result else ""}
+                for s in result.steps
+            ],
+        }
+    except Exception as e:
+        return {"reply": f"LangGraph 处理失败: {str(e)}", "status": "error"}
+
+
+@app.post("/api/agent/langgraph/stream")
+async def langgraph_chat_stream(req: dict):
+    """LangGraph Agent 流式对话 — SSE 事件流"""
+    lg = _get_lg_orchestrator()
+    if not lg:
+        return {"reply": "LangGraph Agent 未就绪"}
+
+    from sse_starlette.sse import EventSourceResponse
+
+    message = sanitize_input(req.get("message", ""), 4000)
+    metadata = {
+        "industry": req.get("industry", "互联网"),
+        "city": req.get("city", "北京"),
+    }
+    lg.working.update_query(metadata["industry"], metadata["city"])
+
+    async def event_generator():
+        async for event in lg.process_stream(message):
+            yield {"data": json.dumps(event, ensure_ascii=False)}
+
+    return EventSourceResponse(event_generator())
+
+
+@app.get("/api/agent/langgraph/status")
+def langgraph_status():
+    """LangGraph Agent 状态"""
+    lg = _get_lg_orchestrator()
+    if not lg:
+        return {"status": "unconfigured"}
+    return {
+        "status": "ready",
+        "orchestrator": lg.get_status(),
+    }
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -3,16 +3,6 @@
     "docx-mcp": {
       "command": "npx",
       "args": ["-y", "@docx-mcp/docx-mcp"]
-    },
-    "word-document-server": {
-      "command": "C:\\Users\\Lenovo\\AppData\\Roaming\\Python\\Python314\\Scripts\\word_mcp_server.exe"
-    },
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp",
-      "headers": {
-        "Authorization": "Bearer YOUR_GITHUB_TOKEN"
-      }
     }
   }
 }
