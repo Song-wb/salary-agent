@@ -1,0 +1,49 @@
+╭─── Claude Code v2.1.143 ─────────────────────────────────────────────────────╮
+│                                                │ Tips for getting started    │
+│                  Welcome back!                 │ Run /init to create a CLAU… │
+│                                                │ ─────────────────────────── │
+│                     ▐▛███▜▌                    │ What's new                  │
+│                    ▝▜█████▛▘                   │ Added plugin dependency en… │
+│                      ▘▘ ▝▝                     │ Added projected context co… │
+│                                                │ Added `worktree.bgIsolatio… │
+│     deepseek-v4-flash · API Usage Billing      │ /release-notes for more     │
+│   ~\Desktop\softwarepractice\salary_analysis   │                             │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+✻ Conversation compacted (ctrl+o for history)
+
+
+❯ /compact                                                                      
+  ⎿  Compacted (ctrl+o to see full summary)
+  ⎿  Read ..\..\..\AppData\Local\Temp\claude\C--Users-Lenovo-Desktop-softwarepractice\c8b25f30-03eb-4466-86bc-873ba4a910dc\tasks\bxkyfjpf4.output (1 lines)
+  ⎿  Read backend\app.py (317 lines)
+  ⎿  Read backend\Dockerfile (50 lines)
+  ⎿  Read frontend\app.py (222 lines)
+  ⎿  Read backend\fetchers\fetcher.py (87 lines)
+  ⎿  Plan file referenced (~\.claude\plans\playful-drifting-map.md)
+
+❯ /context 
+  ⎿  Context Usage
+     ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁ ⛁   deepseek-v4-flash
+     ⛁ ⛀ ⛁ ⛁ ⛁ ⛁ ⛁ ⛀ ⛶ ⛶   34.3k/200k tokens (17%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ 
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   Estimated usage by category
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System prompt: 5.6k tokens (2.8%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ System tools: 16.6k tokens (8.3%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Skills: 824 tokens (0.4%)
+     ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶ ⛶   ⛁ Messages: 11.3k tokens (5.6%)
+     ⛶ ⛶ ⛶ ⛝ ⛝ ⛝ ⛝ ⛝ ⛝ ⛝   ⛶ Free space: 132.7k (66.3%)
+     ⛝ ⛝ ⛝ ⛝ ⛝ ⛝ ⛝ ⛝ ⛝ ⛝   ⛝ Autocompact buffer: 33k tokens (16.5%)
+
+     Skills · /skills
+
+     Built-in
+     ├ claude-api: ~250 tokens
+     ├ update-config: ~240 tokens
+     ├ loop: ~100 tokens
+     ├ keybindings-help: ~80 tokens
+     ├ fewer-permission-prompts: ~60 tokens
+     ├ simplify: ~30 tokens
+     ├ security-review: ~30 tokens
+     ├ init: ~20 tokens
+     └ review: < 20 tokens
