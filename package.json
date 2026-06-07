@@ -1,0 +1,8 @@
+{
+  "name": "salary-analysis",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "pip install --upgrade pip && pip install -r salary_analysis/frontend/requirements.txt && pip install -r salary_analysis/backend/requirements.txt"
+  }
+}
